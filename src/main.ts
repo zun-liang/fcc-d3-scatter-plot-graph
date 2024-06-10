@@ -2,8 +2,8 @@ import "./style.css";
 import * as d3 from "d3";
 import { Margin, Data } from "./types";
 
-const width: number = 950;
-const height: number = 560;
+const width: number = 920;
+const height: number = 630;
 const margin: Margin = { top: 60, right: 20, bottom: 80, left: 70 };
 
 const parseTime = (time: string) =>
@@ -44,7 +44,7 @@ fetch(
       .style("fill", "black")
       .text("Doping in Professional Bicycle Racing");
 
-      svg
+    svg
       .append("text")
       .attr("id", "subtitle")
       .attr("x", width / 2)
@@ -86,5 +86,32 @@ fetch(
       .attr("y", 30)
       .text("Time in Minutes")
       .style("font-size", "15px");
+
+    const legend = svg
+      .append("g")
+      .attr("id", "legend")
+      .attr("transform", `translate(${width - margin.left}, ${height / 2})`);
+
+    const categories = [
+      { label: "No doping allegations", color: "orange" },
+      { label: "Riders with doping allegations", color: "blue" },
+    ];
+    
+    categories.forEach((category, i) => {
+      const legendRow = legend
+        .append("g")
+        .attr("transform", `translate(0, ${i * 20})`);
+      legendRow
+        .append("rect")
+        .attr("width", 18)
+        .attr("height", 18)
+        .attr("fill", category.color);
+      legendRow
+        .append("text")
+        .attr("x", -10)
+        .attr("y", 15)
+        .attr("text-anchor", "end")
+        .text(category.label);
+    });
   })
   .catch((err) => console.error("Error fetching data", err));
