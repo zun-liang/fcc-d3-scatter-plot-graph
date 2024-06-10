@@ -27,8 +27,17 @@ body {
   height: auto;
 }
 
+#tooltip {
+  position: absolute;
+  display: none;
+  background-color: lightsteelblue;
+  color: black;
+  padding: 15px;
+  border-radius: 5px;
+}
+
 @media (min-width: 1000px) {
   .svg-content {
-    max-width: 80%;
+    width: 70%;
   }
 }
