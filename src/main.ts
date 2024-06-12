@@ -74,10 +74,7 @@ fetch(
       .attr("cx", (d) => xScale(d.Year))
       .attr("cy", (d) => yScale(d3.timeParse("%M:%S")(d.Time)!))
       .attr("data-xvalue", (d) => d.Year)
-      .attr("data-yvalue", (d) => {
-        const parsedTime = d3.timeParse("%M:%S")(d.Time);
-        return parsedTime ? parsedTime.toISOString() : "";
-      })
+      .attr("data-yvalue", (d) => d3.timeParse("%M:%S")(d.Time)?.toISOString()!)
       .attr("r", 5)
       .attr("fill", (d) => (d.Doping ? "steelblue" : "orange"))
       .attr("stroke", "black")
